@@ -8,6 +8,7 @@ public class DayNightCycle : MonoBehaviour {
     private bool _isTransitionActive;
 
     [SerializeField] private float _cycleSpeed = 1;
+    [SerializeField] private float _speedDuringTransition = 50;
 
     private void Start() {
         SetIsDay();
@@ -15,7 +16,7 @@ public class DayNightCycle : MonoBehaviour {
 
     private void Update() {
         float cycleSpeed = _cycleSpeed;
-        if (_isTransitionActive) cycleSpeed = 50;
+        if (_isTransitionActive) cycleSpeed = _speedDuringTransition;
 
 
         transform.Rotate(Vector3.right, Time.deltaTime * cycleSpeed);
