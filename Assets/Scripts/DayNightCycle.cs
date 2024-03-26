@@ -5,7 +5,7 @@ using UnityEngine;
 public class DayNightCycle : MonoBehaviour {
 
     private bool _isDay;
-    private bool _isNightDayTransitionActive;
+    private bool _isTransitionActive;
 
     [SerializeField] private float _cycleSpeed = 1;
 
@@ -14,9 +14,24 @@ public class DayNightCycle : MonoBehaviour {
     }
 
     private void Update() {
-        transform.Rotate(Vector3.right, Time.deltaTime * _cycleSpeed);
+        float cycleSpeed = _cycleSpeed;
+        if (_isTransitionActive) cycleSpeed = 50;
+
+
+        transform.Rotate(Vector3.right, Time.deltaTime * cycleSpeed);
+        
+        bool isDayCurrent = _isDay;
 
         SetIsDay();
+
+        if (isDayCurrent != _isDay) {
+            _isTransitionActive = false;
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            _isTransitionActive = true;
+        }
     }
 
     private void SetIsDay() {
