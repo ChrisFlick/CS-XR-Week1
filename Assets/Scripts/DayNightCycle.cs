@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DayNightCycle : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class DayNightCycle : MonoBehaviour {
+
+    private bool _isDay;
+
+    [SerializeField] private float _cycleSpeed = 1;
+
+    private void Start() {
+        SetIsDay();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void Update() {
+        transform.Rotate(Vector3.right, Time.deltaTime * _cycleSpeed);
+    }
+
+    private void SetIsDay() {
+        float yRotation = transform.localEulerAngles.y;
+        _isDay = yRotation > -100f && yRotation < 99f; // If the x rotation is between -100 and 99 _isDay = true.
     }
 }
