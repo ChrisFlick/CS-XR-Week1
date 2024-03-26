@@ -5,6 +5,7 @@ using UnityEngine;
 public class DayNightCycle : MonoBehaviour {
 
     private bool _isDay;
+    private bool _isNightDayTransitionActive;
 
     [SerializeField] private float _cycleSpeed = 1;
 
@@ -14,6 +15,8 @@ public class DayNightCycle : MonoBehaviour {
 
     private void Update() {
         transform.Rotate(Vector3.right, Time.deltaTime * _cycleSpeed);
+
+        SetIsDay();
     }
 
     private void SetIsDay() {
