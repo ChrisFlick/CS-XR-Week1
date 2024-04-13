@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,12 @@ public class DayNightCycle : MonoBehaviour {
     [SerializeField] private float _cycleSpeed = 1;
     [SerializeField] private float _speedDuringTransition = 50;
 
+    [SerializeField] private VRButton _dayNightButton;
+
     private void Start() {
         SetIsDay();
+
+        _dayNightButton.OnPressed += DayNightBUtton_OnPressed;
     }
 
     private void Update() {
@@ -38,5 +43,10 @@ public class DayNightCycle : MonoBehaviour {
     private void SetIsDay() {
         float yRotation = transform.localEulerAngles.y;
         _isDay = yRotation > -100f && yRotation < 99f; // If the x rotation is between -100 and 99 _isDay = true.
+    }
+
+    private void DayNightBUtton_OnPressed(object sender, EventArgs e)
+    {
+        _isTransitionActive = true;
     }
 }
